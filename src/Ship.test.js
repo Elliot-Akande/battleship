@@ -14,3 +14,19 @@ describe(".hit()", () => {
     expect(ship.hit()).toBe(2);
   });
 });
+
+describe(".isSunk()", () => {
+  test("Ship not sunk", () => {
+    const ship = Ship(3);
+    expect(ship.isSunk()).toBe(false);
+  });
+  test("Ship only sunk when no more possible hits", () => {
+    const ship = Ship(3);
+    ship.hit();
+    expect(ship.isSunk()).toBe(false);
+    ship.hit();
+    expect(ship.isSunk()).toBe(false);
+    ship.hit();
+    expect(ship.isSunk()).toBe(true);
+  });
+});

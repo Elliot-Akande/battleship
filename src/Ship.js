@@ -5,6 +5,9 @@ const Ship = (length) => {
       if (hits < length) hits += 1;
       return hits;
     },
+    isSunk() {
+      return hits >= length;
+    },
   };
 };
 
