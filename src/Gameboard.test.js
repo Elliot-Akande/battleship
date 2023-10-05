@@ -66,3 +66,33 @@ describe(".placeShip()", () => {
     });
   });
 });
+
+describe(".receiveAttack", () => {
+  let board;
+
+  beforeEach(() => {
+    board = Gameboard();
+    board.placeShip(5, 5, 4, "y");
+    board.placeShip(1, 7, 2, "x");
+    board.placeShip(1, 4, 3, "x");
+    board.placeShip(3, 0, 5, "x");
+    board.placeShip(6, 9, 3, "x");
+    board.placeShip(8, 7, 3, "y");
+  });
+
+  test("Empty cell becomes hit", () => {
+    board.receiveAttack(0, 0);
+    expect(board.getBoard()[0][0].isHit).toBe(true);
+  });
+
+  test("Already hit cell throws error", () => {
+    board.receiveAttack(0, 0);
+    expect(() => board.receiveAttack(0, 0)).toThrow();
+  });
+
+  test("Targeted ship recieves hit", () => {
+    const hits = board.getBoard()[5][5].ship.getHits();
+    board.receiveAttack(5, 5);
+    expect(board.getBoard()[5][5].ship.getHits()).toBe(hits + 1);
+  });
+});
