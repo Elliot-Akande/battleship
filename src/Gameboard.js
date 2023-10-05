@@ -49,10 +49,13 @@ const Gameboard = () => {
     board[x][y].isHit = true;
   };
 
+  const hasNoShips = () => shipTotal === 0;
+
   return {
     getBoard,
     placeShip,
     receiveAttack,
+    hasNoShips,
   };
 };
 
