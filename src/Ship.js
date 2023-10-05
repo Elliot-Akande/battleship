@@ -8,6 +8,9 @@ const Ship = (length) => {
     isSunk() {
       return hits >= length;
     },
+    getHits() {
+      return hits;
+    },
   };
 };
 
