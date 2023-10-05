@@ -20,13 +20,19 @@ const Gameboard = () => {
       throw new Error("Invalid axis prop");
     }
 
+    for (let i = 0; i < length; i += 1) {
+      const deltaX = axis === "x" ? x + i : x;
+      const deltaY = axis === "y" ? y - i : y;
+      if (Object.prototype.hasOwnProperty.call(board[deltaX][deltaY], "ship")) {
+        throw new Error("Invalid placement: Ships cannot overlap");
+      }
+    }
+
     const ship = Ship(length);
     for (let i = 0; i < length; i += 1) {
-      if (axis === "x") {
-        board[x + i][y] = { ...board[x + i][y], ship };
-      } else {
-        board[x][y - i] = { ...board[x][y - i], ship };
-      }
+      const deltaX = axis === "x" ? x + i : x;
+      const deltaY = axis === "y" ? y - i : y;
+      board[deltaX][deltaY] = { ...board[deltaX][deltaY], ship };
     }
   };
 

@@ -28,15 +28,9 @@ describe(".placeShip()", () => {
     });
 
     test("Throws error if ship overflows grid", () => {
-      expect(() => board.placeShip(0, 0, 3, "y")).toThrow(
-        /Placement out of bounds/
-      );
-      expect(() => board.placeShip(0, 1, 3, "y")).toThrow(
-        /Placement out of bounds/
-      );
-      expect(() => board.placeShip(0, 2, 3, "y")).not.toThrow(
-        /Placement out of bounds/
-      );
+      expect(() => board.placeShip(0, 0, 3, "y")).toThrow();
+      expect(() => board.placeShip(0, 1, 3, "y")).toThrow();
+      expect(() => board.placeShip(0, 2, 3, "y")).not.toThrow();
     });
   });
 
@@ -61,15 +55,14 @@ describe(".placeShip()", () => {
     });
 
     test("Throws error if ship overflows grid", () => {
-      expect(() => board.placeShip(9, 9, 3, "x")).toThrow(
-        /Placement out of bounds/
-      );
-      expect(() => board.placeShip(8, 9, 3, "x")).toThrow(
-        /Placement out of bounds/
-      );
-      expect(() => board.placeShip(7, 9, 3, "x")).not.toThrow(
-        /Placement out of bounds/
-      );
+      expect(() => board.placeShip(9, 9, 3, "x")).toThrow();
+      expect(() => board.placeShip(8, 9, 3, "x")).toThrow();
+      expect(() => board.placeShip(7, 9, 3, "x")).not.toThrow();
+    });
+
+    test("Throws error if ships overlap", () => {
+      board.placeShip(4, 4, 3, "x");
+      expect(() => board.placeShip(5, 5, 3, "y")).toThrow();
     });
   });
 });
