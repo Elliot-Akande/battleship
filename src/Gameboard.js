@@ -9,6 +9,8 @@ const Gameboard = () => {
     .fill()
     .map(() => Array(10).fill(Cell()));
 
+  const getBoard = () => board;
+
   const placeShip = (x, y, length, axis) => {
     if (axis === "x") {
       if (x + length - 1 > 9) throw new Error("Placement out of bounds");
@@ -28,11 +30,9 @@ const Gameboard = () => {
     }
   };
 
-  const getBoard = () => board;
-
   return {
-    placeShip,
     getBoard,
+    placeShip,
   };
 };
 
