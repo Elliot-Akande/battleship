@@ -5,7 +5,7 @@ const Cell = () => ({
 });
 
 const Gameboard = () => {
-  const shipTotal = 0;
+  let shipTotal = 0;
 
   const board = Array(10)
     .fill()
@@ -36,12 +36,15 @@ const Gameboard = () => {
       const deltaY = axis === "y" ? y - i : y;
       board[deltaX][deltaY] = { ...board[deltaX][deltaY], ship };
     }
+
+    shipTotal += 1;
   };
 
   const receiveAttack = (x, y) => {
     if (board[x][y].isHit) throw new Error("Cell has already been hit");
     if (Object.prototype.hasOwnProperty.call(board[x][y], "ship")) {
       board[x][y].ship.hit();
+      if (board[x][y].ship.isSunk()) shipTotal -= 1;
     }
     board[x][y].isHit = true;
   };
