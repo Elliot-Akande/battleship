@@ -4,7 +4,7 @@ const Player = (name = "Player") => {
   const board = Gameboard();
 
   return {
-    getBoard: () => board,
+    ...board,
     getName: () => name,
   };
 };
