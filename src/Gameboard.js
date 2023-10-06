@@ -46,7 +46,7 @@ const Gameboard = () => {
       board[x][y].ship.hit();
       if (board[x][y].ship.isSunk()) shipTotal -= 1;
     }
-    board[x][y].isHit = true;
+    board[x][y] = { ...board[x][y], isHit: true };
   };
 
   const hasNoShips = () => shipTotal === 0;
