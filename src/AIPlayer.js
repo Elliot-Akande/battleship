@@ -9,7 +9,7 @@ const AIPlayer = () => {
         const x = Math.floor(Math.random() * 10);
         const y = Math.floor(Math.random() * 10);
         const axis = Math.floor(Math.random() * 2) === 0 ? "x" : "y";
-        player.getBoard().placeShip(x, y, length, axis);
+        player.placeShip(x, y, length, axis);
         // console.table(
         //   player
         //     .getBoard()
@@ -28,6 +28,7 @@ const AIPlayer = () => {
   };
 
   return {
+    ...player,
     placeShip,
   };
 };
