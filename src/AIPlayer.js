@@ -27,9 +27,21 @@ const AIPlayer = () => {
     throw new Error("Unable to generate ship placement");
   };
 
+  const attack = () => {
+    for (let i = 0; i < 100; i += 1) {
+      try {
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
+        player.attack(x, y);
+        return;
+      } catch (error) {}
+    }
+  };
+
   return {
     ...player,
     placeShip,
+    attack,
   };
 };
 
