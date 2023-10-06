@@ -4,6 +4,8 @@ const Player = (name = "Player") => {
   const board = Gameboard();
   let opponent;
 
+  const getName = () => name;
+
   const setOpponent = (value) => {
     opponent = value;
   };
@@ -12,7 +14,7 @@ const Player = (name = "Player") => {
 
   return {
     ...board,
-    getName: () => name,
+    getName,
     setOpponent,
     attack,
   };
