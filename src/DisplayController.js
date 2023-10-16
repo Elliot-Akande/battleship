@@ -14,7 +14,17 @@ const DisplayController = () => {
     grid.classList.add("grid", player);
     for (let x = 0; x < 10; x += 1) {
       for (let y = 0; y < 10; y += 1) {
-        grid.appendChild(getCell(x, y));
+        const cell = getCell(x, y);
+        if (player !== "playerOne") {
+          cell.addEventListener("click", (event) => {
+            PubSub.publish("ATTACK_CELL", {
+              x: event.currentTarget.dataset.x,
+              y: event.currentTarget.dataset.y,
+            });
+          });
+        }
+
+        grid.appendChild(cell);
       }
     }
     return grid;
