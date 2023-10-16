@@ -11,6 +11,11 @@ const Player = (name = "Player") => {
     opponent = value;
   };
 
+  const receiveAttack = (x, y) => {
+    board.receiveAttack(x, y);
+    PubSub.publish("ATTACK_RECEIVED", { player: name, x, y });
+  };
+
   const attack = (x, y) => opponent.receiveAttack(x, y);
 
   const placeShip = (x, y, length, axis) => {
@@ -24,6 +29,7 @@ const Player = (name = "Player") => {
     setOpponent,
     attack,
     placeShip,
+    receiveAttack,
   };
 };
 
