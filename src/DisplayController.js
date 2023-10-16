@@ -20,9 +20,15 @@ const DisplayController = () => {
     return grid;
   };
 
+  const newGrid = (player) => {
+    const div = document.querySelector(".content");
+    div.appendChild(getGrid(player));
+  };
+
   return {
     getCell,
     getGrid,
+    newGrid,
   };
 };
 
