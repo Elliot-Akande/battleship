@@ -28,13 +28,15 @@ const GameController = () => {
 
   const play = (msg, { x, y }) => {
     playerOne.attack(x, y);
-
-    if (playerTwo.hasNoShips()) console.log("Game over!");
-    else {
-      playerTwo.attack();
-      if (playerOne.hasNoShips()) console.log("Game over!");
+    if (playerTwo.hasNoShips()) {
+      PubSub.publish("GAME_OVER", { winner: playerOne.getName() });
+      return;
     }
 
+    playerTwo.attack();
+    if (playerOne.hasNoShips()) {
+      PubSub.publish("GAME_OVER", { winner: playerTwo.getName() });
+    }
   };
 
   PubSub.subscribe("ATTACK_CELL", play);
