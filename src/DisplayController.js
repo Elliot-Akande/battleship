@@ -25,6 +25,22 @@ const DisplayController = () => {
     div.appendChild(getGrid(player));
   };
 
+  const placeShip = (msg, data) => {
+    if (data.player !== "playerOne") return;
+    const { x, y, length, axis } = data;
+
+    for (let i = 0; i < length; i += 1) {
+      const deltaX = axis === "x" ? x + i : x;
+      const deltaY = axis === "y" ? y - i : y;
+      const cell = document.querySelector(
+        `[data-x='${deltaX}'][data-y='${deltaY}']`
+      );
+      cell.classList.add("ship");
+    }
+  };
+
+  PubSub.subscribe("SHIP_PLACED", placeShip);
+
   return {
     getCell,
     getGrid,
