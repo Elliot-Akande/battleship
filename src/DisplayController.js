@@ -9,6 +9,14 @@ const DisplayController = () => {
     return cell;
   };
 
+  const attackCell = (event) => {
+    PubSub.publish("ATTACK_CELL", {
+      x: event.currentTarget.dataset.x,
+      y: event.currentTarget.dataset.y,
+    });
+    event.currentTarget.removeEventListener("click", attackCell);
+  };
+
   const getGrid = (player) => {
     const grid = document.createElement("div");
     grid.classList.add("grid", player);
@@ -16,12 +24,7 @@ const DisplayController = () => {
       for (let y = 0; y < 10; y += 1) {
         const cell = getCell(x, y);
         if (player !== "playerOne") {
-          cell.addEventListener("click", (event) => {
-            PubSub.publish("ATTACK_CELL", {
-              x: event.currentTarget.dataset.x,
-              y: event.currentTarget.dataset.y,
-            });
-          });
+          cell.addEventListener("click", attackCell);
         }
 
         grid.appendChild(cell);
