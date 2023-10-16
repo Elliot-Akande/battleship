@@ -35,9 +35,8 @@ const DisplayController = () => {
     div.appendChild(getGrid(player));
   };
 
-  const placeShip = (msg, data) => {
-    if (data.player !== "playerOne") return;
-    const { x, y, length, axis } = data;
+  const placeShip = (msg, { player, x, y, length, axis }) => {
+    if (player !== "playerOne") return;
 
     for (let i = 0; i < length; i += 1) {
       const deltaX = axis === "x" ? x + i : x;
