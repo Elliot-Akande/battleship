@@ -36,19 +36,26 @@ const DisplayController = () => {
   };
 
   const placeShip = (msg, { player, x, y, length, axis }) => {
-    if (player !== "playerOne") return;
+    const board = document.querySelector(`.grid.${player}`);
 
     for (let i = 0; i < length; i += 1) {
       const deltaX = axis === "x" ? x + i : x;
       const deltaY = axis === "y" ? y - i : y;
-      const cell = document.querySelector(
+      const cell = board.querySelector(
         `[data-x='${deltaX}'][data-y='${deltaY}']`
       );
       cell.classList.add("ship");
     }
   };
 
+  const receiveAttack = (msg, { player, x, y }) => {
+    const board = document.querySelector(`.grid.${player}`);
+    const cell = board.querySelector(`[data-x='${x}'][data-y='${y}']`);
+    cell.classList.add("hit");
+  };
+
   PubSub.subscribe("SHIP_PLACED", placeShip);
+  PubSub.subscribe("ATTACK_RECEIVED", receiveAttack);
 
   return {
     getCell,
