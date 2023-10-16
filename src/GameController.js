@@ -26,7 +26,7 @@ const GameController = () => {
     PubSub.publish("SETUP COMPLETE");
   };
 
-  const play = (x, y) => {
+  const play = (msg, { x, y }) => {
     playerOne.attack(x, y);
 
     if (playerTwo.hasNoShips()) console.log("Game over!");
@@ -36,6 +36,8 @@ const GameController = () => {
     }
 
   };
+
+  PubSub.subscribe("ATTACK_CELL", play);
 
   return {
     setup,
