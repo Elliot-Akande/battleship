@@ -26,9 +26,20 @@ const GameController = () => {
     PubSub.publish("SETUP COMPLETE");
   };
 
+  const play = (x, y) => {
+    playerOne.attack(x, y);
+
+    if (playerTwo.hasNoShips()) console.log("Game over!");
+    else {
+      playerTwo.attack();
+      if (playerOne.hasNoShips()) console.log("Game over!");
+    }
+
+  };
 
   return {
     setup,
+    play,
   };
 };
 
