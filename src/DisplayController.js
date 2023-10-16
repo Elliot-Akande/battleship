@@ -57,8 +57,19 @@ const DisplayController = () => {
     cell.classList.add("hit");
   };
 
+  const gameOver = (msg, { winner }) => {
+    const cells = document.querySelectorAll(".playerTwo>.cell");
+    cells.forEach((cell) => cell.removeEventListener("click", attackCell));
+
+    const container = document.querySelector(".content");
+    container.textContent = `Player ${
+      winner === "playerOne" ? "One" : "Two"
+    } wins!`;
+  };
+
   PubSub.subscribe("SHIP_PLACED", placeShip);
   PubSub.subscribe("ATTACK_RECEIVED", receiveAttack);
+  PubSub.subscribe("GAME_OVER", gameOver);
 
   return {
     getCell,
