@@ -1,7 +1,7 @@
 import Player from "./Player";
 
 const AIPlayer = () => {
-  const player = Player("CPU");
+  const player = Player("playerTwo");
 
   const placeShip = (length) => {
     for (let i = 0; i < 100; i += 1) {
