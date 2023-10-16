@@ -14,3 +14,12 @@ describe(".getCell()", () => {
     expect(parseInt(cell.dataset.y, 10)).toBe(7);
   });
 });
+
+describe(".getGrid()", () => {
+  test("happy path", () => {
+    const grid = display.getGrid("playerOne");
+    expect(grid instanceof HTMLElement).toBeTruthy();
+    expect(grid.childElementCount).toBe(100);
+    expect(grid.classList.contains("playerOne")).toBeTruthy();
+  });
+});
