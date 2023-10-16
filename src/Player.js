@@ -1,3 +1,4 @@
+import PubSub from "pubsub-js";
 import Gameboard from "./Gameboard";
 
 const Player = (name = "Player") => {
@@ -12,11 +13,17 @@ const Player = (name = "Player") => {
 
   const attack = (x, y) => opponent.receiveAttack(x, y);
 
+  const placeShip = (x, y, length, axis) => {
+    board.placeShip(x, y, length, axis);
+    PubSub.publish("SHIP_PLACED", { player: name, x, y, length, axis });
+  };
+
   return {
     ...board,
     getName,
     setOpponent,
     attack,
+    placeShip,
   };
 };
 
