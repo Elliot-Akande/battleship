@@ -1,3 +1,5 @@
+import PubSub from "pubsub-js";
+
 const DisplayController = () => {
   const getCell = (x, y) => {
     const cell = document.createElement("div");
