@@ -9,11 +9,12 @@ const DisplayController = () => {
 
     cell.addEventListener("dragover", (event) => {
       event.preventDefault();
-      event.dataTransfer.dropEffect = "none";
+      event.dataTransfer.dropEffect = "move";
     });
 
     cell.addEventListener("drop", (event) => {
       event.preventDefault();
+
       PubSub.publish("RQST_PLACE_SHIP", {
         ...JSON.parse(event.dataTransfer.getData("text/plain")),
         y: event.currentTarget.dataset.y,
@@ -109,7 +110,9 @@ const DisplayController = () => {
       });
 
       shipElement.addEventListener("dragend", (event) => {
-        event.currentTarget.remove();
+        if (event.dataTransfer.dropEffect === "move") {
+          event.currentTarget.remove();
+        }
       });
 
       for (let i = 0; i < ship; i += 1) {
