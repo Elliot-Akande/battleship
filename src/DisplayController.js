@@ -6,6 +6,21 @@ const DisplayController = () => {
     cell.dataset.x = x;
     cell.dataset.y = y;
     cell.classList.add("cell");
+
+    cell.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "none";
+    });
+
+    cell.addEventListener("drop", (event) => {
+      event.preventDefault();
+      PubSub.publish("RQST_PLACE_SHIP", {
+        ...JSON.parse(event.dataTransfer.getData("text/plain")),
+        y: event.currentTarget.dataset.y,
+        x: event.currentTarget.dataset.x,
+      });
+    });
+
     return cell;
   };
 
