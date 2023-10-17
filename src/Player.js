@@ -18,17 +18,26 @@ const Player = (name = "Player") => {
 
   const attack = (x, y) => opponent.receiveAttack(x, y);
 
-  const placeShip = (x, y, length, axis) => {
-    board.placeShip(x, y, length, axis);
-    PubSub.publish("SHIP_PLACED", { player: name, x, y, length, axis });
+  const placeShip = (msg, { x, y, length, axis, player }) => {
+    if (player !== name) return;
+    try {
+      board.placeShip(
+        parseInt(x, 10),
+        parseInt(y, 10),
+        parseInt(length, 10),
+        axis
+      );
+      PubSub.publish("SHIP_PLACED", { player: name, x, y, length, axis });
+    } catch {}
   };
+
+  PubSub.subscribe("RQST_PLACE_SHIP", placeShip);
 
   return {
     ...board,
     getName,
     setOpponent,
     attack,
-    placeShip,
     receiveAttack,
   };
 };
