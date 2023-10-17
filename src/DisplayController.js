@@ -69,7 +69,14 @@ const DisplayController = () => {
     }
 
     const ship = document.querySelector(`.ship[data-length='${length}']`);
+    if (!ship) return;
     ship.remove();
+
+    const shipSelection = document.querySelector(".shipSelection");
+    if (!shipSelection.hasChildNodes()) {
+      shipSelection.remove();
+      PubSub.publish("ALL_SHIPS_PLACED");
+    }
   };
 
   const receiveAttack = (msg, { player, x, y }) => {
