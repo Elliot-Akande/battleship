@@ -115,6 +115,11 @@ const DisplayController = () => {
         }
       });
 
+      shipElement.addEventListener("dblclick", (event) => {
+        const elem = event.currentTarget;
+        elem.dataset.axis = elem.dataset.axis === "x" ? "y" : "x";
+      });
+
       for (let i = 0; i < ship; i += 1) {
         const cell = document.createElement("div");
         shipElement.appendChild(cell);
