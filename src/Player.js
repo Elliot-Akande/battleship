@@ -18,20 +18,22 @@ const Player = (name = "Player") => {
 
   const attack = (x, y) => opponent.receiveAttack(x, y);
 
-  const placeShip = (msg, { x, y, length, axis, player }) => {
-    if (player !== name) return;
-    try {
-      board.placeShip(
-        parseInt(x, 10),
-        parseInt(y, 10),
-        parseInt(length, 10),
-        axis
-      );
-      PubSub.publish("SHIP_PLACED", { player: name, x, y, length, axis });
-    } catch {}
+  const placeShip = (x, y, length, axis) => {
+    board.placeShip(
+      parseInt(x, 10),
+      parseInt(y, 10),
+      parseInt(length, 10),
+      axis
+    );
+    PubSub.publish("SHIP_PLACED", { player: name, x, y, length, axis });
   };
 
-  PubSub.subscribe("RQST_PLACE_SHIP", placeShip);
+  PubSub.subscribe("RQST_PLACE_SHIP", (msg, { x, y, length, axis, player }) => {
+    if (player !== name) return;
+    try {
+      placeShip(x, y, length, axis);
+    } catch {}
+  });
 
   return {
     ...board,
@@ -39,6 +41,7 @@ const Player = (name = "Player") => {
     setOpponent,
     attack,
     receiveAttack,
+    placeShip,
   };
 };
 
