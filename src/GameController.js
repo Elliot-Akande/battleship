@@ -6,7 +6,6 @@ const GameController = (playerOne, playerTwo, ships) => {
 
   const setup = () => {
     ships.forEach((ship) => playerTwo.placeShip(ship));
-    PubSub.publish("SETUP COMPLETE");
   };
 
   const play = (msg, { x, y }) => {
