@@ -55,10 +55,12 @@ const DisplayController = () => {
 
   const placeShip = (msg, { player, x, y, length, axis }) => {
     const board = document.querySelector(`.grid.${player}`);
+    const xInt = parseInt(x, 10);
+    const yInt = parseInt(y, 10);
 
     for (let i = 0; i < length; i += 1) {
-      const deltaX = axis === "x" ? x + i : x;
-      const deltaY = axis === "y" ? y - i : y;
+      const deltaX = axis === "x" ? xInt + i : xInt;
+      const deltaY = axis === "y" ? yInt - i : yInt;
       const cell = board.querySelector(
         `[data-x='${deltaX}'][data-y='${deltaY}']`
       );
