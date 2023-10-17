@@ -84,6 +84,45 @@ const DisplayController = () => {
     } wins!`;
   };
 
+  const boardSetup = (player, ships) => {
+    newGrid("playerOne");
+    const container = document.querySelector(".content");
+    const shipDiv = document.createElement("div");
+    shipDiv.classList.add("shipSelection");
+
+    ships.forEach((ship) => {
+      const shipElement = document.createElement("div");
+      shipElement.dataset.length = ship;
+      shipElement.dataset.axis = "x";
+      shipElement.classList.add("ship");
+      shipElement.draggable = true;
+
+      shipElement.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({
+            length: event.currentTarget.dataset.length,
+            axis: event.currentTarget.dataset.axis,
+            player,
+          })
+        );
+      });
+
+      shipElement.addEventListener("dragend", (event) => {
+        event.currentTarget.remove();
+      });
+
+      for (let i = 0; i < ship; i += 1) {
+        const cell = document.createElement("div");
+        shipElement.appendChild(cell);
+      }
+
+      shipDiv.appendChild(shipElement);
+    });
+
+    container.appendChild(shipDiv);
+  };
+
   PubSub.subscribe("SHIP_PLACED", placeShip);
   PubSub.subscribe("ATTACK_RECEIVED", receiveAttack);
   PubSub.subscribe("GAME_OVER", gameOver);
@@ -92,6 +131,7 @@ const DisplayController = () => {
     getCell,
     getGrid,
     newGrid,
+    boardSetup,
   };
 };
 
