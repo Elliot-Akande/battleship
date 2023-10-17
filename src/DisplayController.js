@@ -67,6 +67,9 @@ const DisplayController = () => {
       );
       cell.classList.add("ship");
     }
+
+    const ship = document.querySelector(`.ship[data-length='${length}']`);
+    ship.remove();
   };
 
   const receiveAttack = (msg, { player, x, y }) => {
@@ -107,12 +110,6 @@ const DisplayController = () => {
             player,
           })
         );
-      });
-
-      shipElement.addEventListener("dragend", (event) => {
-        if (event.dataTransfer.dropEffect === "move") {
-          event.currentTarget.remove();
-        }
       });
 
       shipElement.addEventListener("dblclick", (event) => {
