@@ -15,10 +15,14 @@ const DisplayController = () => {
     cell.addEventListener("drop", (event) => {
       event.preventDefault();
 
+      const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+      const xCoord = parseInt(event.currentTarget.dataset.x, 10);
+      const yCoord = parseInt(event.currentTarget.dataset.y, 10);
+
       PubSub.publish("RQST_PLACE_SHIP", {
-        ...JSON.parse(event.dataTransfer.getData("text/plain")),
-        y: event.currentTarget.dataset.y,
-        x: event.currentTarget.dataset.x,
+        ...data,
+        x: data.axis === "x" ? xCoord - data.cell : xCoord,
+        y: data.axis === "y" ? yCoord + data.cell : yCoord,
       });
     });
 
@@ -95,6 +99,19 @@ const DisplayController = () => {
     } wins!`;
   };
 
+  const currentCellOffset = (event) => {
+    const { axis, length } = event.currentTarget.dataset;
+    if (axis === "x") {
+      const cellSize = event.currentTarget.offsetHeight / length;
+      return Math.floor(event.offsetY / cellSize);
+    }
+
+    const cellSize = event.currentTarget.offsetWidth / length;
+    return Math.floor(
+      (event.currentTarget.offsetWidth - event.offsetX) / cellSize
+    );
+  };
+
   const boardSetup = (player, ships) => {
     newGrid("playerOne");
     const container = document.querySelector(".content");
@@ -114,6 +131,7 @@ const DisplayController = () => {
           JSON.stringify({
             length: event.currentTarget.dataset.length,
             axis: event.currentTarget.dataset.axis,
+            cell: currentCellOffset(event),
             player,
           })
         );
