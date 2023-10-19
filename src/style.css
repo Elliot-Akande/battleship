@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&family=Inter:wght@400;600&display=swap");
+:root {
+  --blue-outline: #0d5f8b;
+  --blue-dark: #0f1a3e;
+  --blue: #1a95cd;
+  --grey: yellowgreen;
+}
+
+body {
+  background: var(--blue-dark);
+  position: relative;
+  margin: 0;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
