@@ -34,3 +34,53 @@ h1 {
   padding: 10px 20px;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 40px;
+  gap: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 4px;
+  width: min-content;
+
+  background: var(--blue-outline);
+  padding: 4px;
+}
+
+.cell {
+  background: var(--blue);
+  position: relative;
+}
+
+.cell:hover {
+  filter: brightness(0.85);
+}
+
+.playerOne > .ship {
+  background: var(--grey);
+}
+
+.hit::before,
+.hit.ship::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+
+  background: rgb(255, 255, 255);
+  border-radius: 32px;
+}
+
+.hit.ship::before {
+  background: rgb(210, 69, 69);
+}
+
