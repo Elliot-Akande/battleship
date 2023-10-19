@@ -136,3 +136,53 @@ h1 {
   background: var(--grey);
 }
 
+/* Modal */
+
+.modalBg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #00000065;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  height: 300px;
+  width: 500px;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.modal > .text,
+.modal > .button {
+  font-size: 40px;
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+}
+
+.modal > .text {
+  color: var(--blue-dark);
+}
+.modal > .button {
+  color: white;
+  background: var(--blue-dark);
+  padding: 12px 24px;
+  border-radius: 10px;
+  transition: 200ms;
+}
+
+.modal > .button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
