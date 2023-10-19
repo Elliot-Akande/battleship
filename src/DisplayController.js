@@ -76,9 +76,9 @@ const DisplayController = () => {
     if (!ship) return;
     ship.remove();
 
-    const shipSelection = document.querySelector(".shipSelection");
-    if (!shipSelection.hasChildNodes()) {
-      shipSelection.remove();
+    const shipDiv = document.querySelector(".shipDiv");
+    if (!shipDiv.hasChildNodes()) {
+      shipDiv.parentNode.remove();
       PubSub.publish("ALL_SHIPS_PLACED");
     }
   };
@@ -115,8 +115,14 @@ const DisplayController = () => {
   const boardSetup = (player, ships) => {
     newGrid("playerOne");
     const container = document.querySelector(".content");
+    const shipSelection = document.createElement("div");
+    shipSelection.classList.add("shipSelection");
+
+    const shipText = document.createElement("p");
+    shipText.textContent = "Double click to rotate";
+
     const shipDiv = document.createElement("div");
-    shipDiv.classList.add("shipSelection");
+    shipDiv.classList.add("shipDiv");
 
     ships.forEach((ship) => {
       const shipElement = document.createElement("div");
@@ -150,7 +156,9 @@ const DisplayController = () => {
       shipDiv.appendChild(shipElement);
     });
 
-    container.appendChild(shipDiv);
+    shipSelection.appendChild(shipText);
+    shipSelection.appendChild(shipDiv);
+    container.appendChild(shipSelection);
   };
 
   PubSub.subscribe("SHIP_PLACED", placeShip);
