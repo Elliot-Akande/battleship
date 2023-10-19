@@ -84,3 +84,55 @@ h1 {
   background: rgb(210, 69, 69);
 }
 
+/* Ship Selection */
+
+.shipSelection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  width: 300px;
+  min-height: 444px;
+  background: var(--blue);
+  border: 4px solid var(--blue-outline);
+}
+
+.shipSelection > p {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  color: var(--blue-outline);
+}
+
+.shipDiv {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.shipDiv > .ship {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  height: min-content;
+
+  background: var(--blue-outline);
+  padding: 4px;
+}
+
+.shipDiv > .ship[data-axis="y"] {
+  flex-direction: row;
+}
+
+.shipDiv > .ship > * {
+  height: 40px;
+  width: 40px;
+  background: var(--grey);
+}
+
