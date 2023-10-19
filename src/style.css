@@ -17,3 +17,20 @@ body {
   box-sizing: border-box;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  width: min-content;
+  font-family: "Big Shoulders Stencil Text", sans-serif;
+  font-size: 100px;
+  margin-top: 30px;
+  margin-bottom: 80px;
+  color: #ffffff;
+  border: 10px solid #ffffff;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
