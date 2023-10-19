@@ -94,9 +94,25 @@ const DisplayController = () => {
     cells.forEach((cell) => cell.removeEventListener("click", attackCell));
 
     const container = document.querySelector(".content");
-    container.textContent = `Player ${
-      winner === "playerOne" ? "One" : "Two"
-    } wins!`;
+    const modalBg = document.createElement("div");
+    const modal = document.createElement("div");
+    const text = document.createElement("div");
+    const button = document.createElement("div");
+
+    modalBg.classList.add("modalBg");
+    modal.classList.add("modal");
+    text.classList.add("text");
+    button.classList.add("button");
+
+    text.textContent = `You ${winner === "playerOne" ? "won" : "lost"}`;
+    button.textContent = "Play again";
+
+    button.addEventListener("click", () => window.location.reload());
+
+    modal.appendChild(text);
+    modal.appendChild(button);
+    modalBg.appendChild(modal);
+    container.appendChild(modalBg);
   };
 
   const currentCellOffset = (event) => {
