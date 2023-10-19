@@ -8,12 +8,12 @@ The main goal of this project was to practice test-driven development (TDD) usin
 
 ### Technologies
 
-HTML
-CSS
-JavaScript
-Jest
-NPM 
-Webpack
+- HTML
+- CSS
+- JavaScript
+- Jest
+- NPM 
+- Webpack
 
 ### Installation
 
